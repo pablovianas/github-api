@@ -2,12 +2,22 @@ const screen = {
     userProfile: document.querySelector('.profile-data'),
     renderUser(user){
         this.userProfile.innerHTML = `<div class="info">
-                            <img src="${user.avatarUrl}" alt="user profile picture"/>
-                             <div class="data">
-                                <h1>${user.name ?? "Não possui nome cadastrado"}</h1>
-                                 <p>${user.bio ?? "Não possui bio cadastrada"}</p>   
-                             </div>
-                         </div>`
+                                            <img src="${user.avatarUrl}" alt="user profile picture"/>
+                                            <div class="data">
+                                                <h1>${user.name ?? "Não possui nome cadastrado"}</h1>
+                                                <p>${user.bio ?? "Não possui bio cadastrada"}</p>  
+                                            </div>
+                                        </div>          
+                                        <div class="followers section">
+                                            <h2> Followers </h2>
+                                            <ul>
+                                                <li> <a href="${user.followersUrl}" target="_blank">${user.followers}</a>followers</li>
+                                                <li> <a href="${user.followingUrl}" target="_blank">${user.following}</a>following</li>
+                                            </ul>
+                                        </div>
+                                    `
+
+        
         
         let repositoriesItems = ''
         user.repositories.forEach((repo) => {
