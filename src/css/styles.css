@@ -134,6 +134,14 @@ main {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
+  gap: 15px;
+}
+
+.container .profile-data .repositories .repositories-infos{
+  justify-content: space-evenly;
+  border: 1px solid grey;
+  border-radius: 5px;
+  padding: 3px;
 }
 
 .container .profile-data .repositories ul li a, 
@@ -141,7 +149,7 @@ main {
 .container .profile-data .events ul li{
   padding: 20px;
   border: 1px solid grey;  
-  margin: 20px;
+  margin: 10px;
   display: block;
   border-radius: 7px;
   transition: 0.3s ease-in-out;

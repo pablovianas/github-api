@@ -16,12 +16,17 @@ const screen = {
                                             </ul>
                                         </div>
                                     `
-
-        
-        
         let repositoriesItems = ''
         user.repositories.forEach((repo) => {
-            repositoriesItems += `<li> <a href="${repo.html_url}" target="_blank">${repo.name}</a></li>`
+            repositoriesItems += `<li> <a href="${repo.html_url}" target="_blank">${repo.name}</a>
+                                    <ul class="repositories-infos">
+                                        <li><i class="fa-solid fa-code-fork"></i> ${repo.forks_count}</li>
+                                        <li><i class="fa-solid fa-star"></i> ${repo.stargazers_count} </li>
+                                        <li><i class="fa-solid fa-eye"></i> ${repo.watchers_count} </li>
+                                        <li><i class="fa-solid fa-code"></i> ${repo.language} </li>
+                                    </ul>
+                                </li>
+                                `
         })
 
         if (user.repositories.length > 0) {
