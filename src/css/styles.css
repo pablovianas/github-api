@@ -31,7 +31,7 @@ main {
 }
 
 .section{
-  padding: 70px 0;
+  padding: 50px 0;
 }
 
 .container {
@@ -128,13 +128,17 @@ main {
   text-align: center;
 }
 
-.container .profile-data .repositories ul, .container .profile-data .followers ul{
+.container .profile-data .repositories ul, 
+.container .profile-data .followers ul,
+.container .profile-data .events ul {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
 }
 
-.container .profile-data .repositories ul li a, .container .profile-data .followers ul li a {
+.container .profile-data .repositories ul li a, 
+.container .profile-data .followers ul li a,
+.container .profile-data .events ul li{
   padding: 20px;
   border: 1px solid grey;  
   margin: 20px;
@@ -143,7 +147,13 @@ main {
   transition: 0.3s ease-in-out;
 }
 
-.container .profile-data .repositories ul li a:hover, .container .profile-data .followers ul li a:hover{
+.container .profile-data .events ul li span{
+  font-weight: bold;
+}
+
+.container .profile-data .repositories ul li a:hover, 
+.container .profile-data .followers ul li a:hover,
+.container .profile-data .events ul li:hover{
   background-color:hotpink;
   color: #fff
 }

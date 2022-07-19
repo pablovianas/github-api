@@ -31,6 +31,27 @@ const screen = {
                                             </div>`     
         }
 
+        let eventsItems = ''
+
+        user.events.forEach((event)=> {
+            const isEventTypeCreateOrPush = event.type === 'CreateEvent' || event.type === 'PushEvent'
+            const eventPayloadCommits = event.payload.commits
+            if (isEventTypeCreateOrPush){
+                if (eventPayloadCommits){
+                    eventPayloadCommits.forEach(commit => {
+                            eventsItems += `<li> <span> ${event.repo.name} </span> - ${commit.message}</li>`
+                    })
+                }
+            }
+        })
+
+        if (user.events.length > 0){
+            this.userProfile.innerHTML += `<div class="events section">
+                                                <h2>Eventos</h2>
+                                                <ul> ${eventsItems}</ul>
+                                            </div>` 
+        }
+
     },
     renderUserNotFound(){
         this.userProfile.innerHTML = "<h3> Usuário não encontrado </h3>"
