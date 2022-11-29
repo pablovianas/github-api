@@ -16,47 +16,48 @@ const screen = {
                                             </ul>
                                         </div>
                                     `
+        this.renderRepositories(user.repositories)
+        this.renderEvents(user.events)
+    },
+    renderRepositories(repositories){
         let repositoriesItems = ''
-        user.repositories.forEach((repo) => {
+        repositories.forEach((repo) => {
             repositoriesItems += `<li> <a href="${repo.html_url}" target="_blank">${repo.name}</a>
                                     <ul class="repositories-infos">
                                         <li><i class="fa-solid fa-code-fork"></i> ${repo.forks_count}</li>
                                         <li><i class="fa-solid fa-star"></i> ${repo.stargazers_count} </li>
                                         <li><i class="fa-solid fa-eye"></i> ${repo.watchers_count} </li>
-                                        <li><i class="fa-solid fa-code"></i> ${repo.language} </li>
+                                        <li><i class="fa-solid fa-code"></i> ${repo.language ?? 'Sem linguagem'} </li>
                                     </ul>
                                 </li>
                                 `
         })
 
-        if (user.repositories.length > 0) {
+        if (repositories.length > 0) {
             this.userProfile.innerHTML += `<div class="repositories section">
                                                 <h2>Repositórios</h2>
                                                 <ul> ${repositoriesItems}</ul>
-                                            </div>`     
+                                            </div>`
         }
-
+    },
+    renderEvents(events){
         let eventsItems = ''
 
-        user.events.forEach((event)=> {
+        events.forEach((event) => {
             const isEventTypeCreateOrPush = event.type === 'CreateEvent' || event.type === 'PushEvent'
-            const eventPayloadCommits = event.payload.commits
-            if (isEventTypeCreateOrPush){
-                if (eventPayloadCommits){
-                    eventPayloadCommits.forEach(commit => {
-                            eventsItems += `<li> <span> ${event.repo.name} </span> - ${commit.message}</li>`
-                    })
-                }
+            if (isEventTypeCreateOrPush) {
+                event.payload.commits.filter(commit => {
+                    eventsItems += `<li> <span> ${event.repo.name} </span> - ${commit.message}</li>`
+                })
             }
         })
 
-        if (user.events.length > 0){
+        if (events.length > 0) {
             this.userProfile.innerHTML += `<div class="events section">
                                                 <h2>Eventos</h2>
                                                 <ul> ${eventsItems}</ul>
-                                            </div>` 
+                                            </div>`
         }
-
     },
     renderUserNotFound(){
         this.userProfile.innerHTML = "<h3> Usuário não encontrado </h3>"
