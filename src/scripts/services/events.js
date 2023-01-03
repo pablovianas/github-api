@@ -1,7 +1,7 @@
-import { baseUrl, repositoriesQuantity } from '../variables.js'
+import { baseUrl, maxItems } from '../variables.js'
 
 async function getEvents(userName) {
-    const response = await fetch(`${baseUrl}/${userName}/events?per_page=${repositoriesQuantity}`)
+    const response = await fetch(`${baseUrl}/${userName}/events?per_page=${maxItems}`)
     return await response.json()
 }
 
