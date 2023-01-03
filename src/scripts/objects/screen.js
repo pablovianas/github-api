@@ -27,7 +27,7 @@ const screen = {
                                         <li><i class="fa-solid fa-code-fork"></i> ${repo.forks_count}</li>
                                         <li><i class="fa-solid fa-star"></i> ${repo.stargazers_count} </li>
                                         <li><i class="fa-solid fa-eye"></i> ${repo.watchers_count} </li>
-                                        <li><i class="fa-solid fa-code"></i> ${repo.language ?? 'Sem linguagem'} </li>
+                                        <li><i class="fa-solid fa-code"></i> ${repo.language ?? "Sem linguagem"} </li>
                                     </ul>
                                 </li>
                                 `
@@ -43,13 +43,11 @@ const screen = {
     renderEvents(events){
         let eventsItems = ''
 
-        events.forEach((event) => {
-            const isEventTypeCreateOrPush = event.type === 'CreateEvent' || event.type === 'PushEvent'
-            if (isEventTypeCreateOrPush) {
-                event.payload.commits.filter(commit => {
-                    eventsItems += `<li> <span> ${event.repo.name} </span> - ${commit.message}</li>`
-                })
-            }
+        events.filter((event) => {
+            return event.type === "CreateEvent" || event.type === "PushEvent"
+        }).map((event)=>{
+            console.log(event)
+            eventsItems += `<li> <span> ${event.repo.name} </span> - ${event.payload.commits?.[0].message ?? "Repositório criado"}</li>`
         })
 
         if (events.length > 0) {
@@ -57,6 +55,8 @@ const screen = {
                                                 <h2>Eventos</h2>
                                                 <ul> ${eventsItems}</ul>
                                             </div>`
+        }else{
+            this.userProfile.innerHTML += `<h2>Não possui eventos para mostrar</h2>`
         }
     },
     renderUserNotFound(){
